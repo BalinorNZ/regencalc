@@ -1,4 +1,4 @@
 npm install supervisor -g
-npm install mongodb
-npm install mongoose
+npm install mongodb -g
+npm install mongoose -g
 http://javascriptplayground.com/blog/2012/06/node-express-todo-app-redis
