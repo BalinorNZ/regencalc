@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>{title}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p>Base is <%= base %> - Gain is <%= gain %> - Cost is <%= cost %></p>
+    <h1>{title}</h1>
+    <p>Welcome to {title}</p>
+    <p>Base is {base} - Gain is {gain} - Cost is {cost}</p>
 	<table>
 		<tr><th>Level</th><th>Int</th><th>Regen</th><th>Seconds</th></tr>
-	<% for(var i=0; i<25; i++) {%>
+	{#levels}
 		<tr>
-			<td><%= i+1 %></td>
-			<% var intel = Math.round((base+i*gain)*10)/10 %>
-			<td><%= intel %></td>
-			<% var regen = Math.round(((intel*0.04)+0.01)*100)/100 %>
-			<td><%= regen %></td>
-			<td><%= Math.round((cost/regen)*10)/10 %></td>
+			<td>{level}</td>
+			<td>{intel}</td>
+			<td>{regen}</td>
+			<td>{time}</td>
 		</tr>
-	<% } %>
+	{/levels}
 	</table>
 
 	<ul>
-  <% colors.forEach(function(color){ %>
-    <li><%= color.name %></li>
-  <% }) %>
+	{#colors}
+    <li>{.}</li>
+  	{/colors}
 	</ul>
 
   </body>

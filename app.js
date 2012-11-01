@@ -12,6 +12,9 @@ var express = require('express')
 
 var app = express();
 
+// assign dust engine to .dust files
+app.engine('dust', cons.dust);
+
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
