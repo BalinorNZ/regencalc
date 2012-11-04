@@ -20,11 +20,12 @@
 	{/levels}
 	</table>
 
-	<ul>
-	{#colors}
-    <li>{.}</li>
-  	{/colors}
-	</ul>
+	<form action="/" method="POST">
+		<input type="text" id="stat_base" name="stat[base]" value="{stat.base}" />
+		<input type="text" id="stat_gain" name="stat[gain]" value="{stat.gain}" />
+		<input type="text" id="stat_cost" name="stat[cost]" value="{stat.cost}" />
+		<input type="submit" />
+	</form> 
 
   </body>
 </html>
