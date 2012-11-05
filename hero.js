@@ -1,26 +1,21 @@
 /**
  * @constructor
+ * @param {object} stats
  */
-function Hero () {
-	this.baseInt = 0;
- 	this.intPerLevel = 0.0;
- 	this.level = 1;
-	this.heroName = ""; // TODO: should be enum
+
+exports.Hero = function (stats) {
+	this.base = parseFloat(stats.base);
+ 	this.gain = parseFloat(stats.gain);
+ 	this.cost = parseFloat(stats.cost);
 }
 
-
-Hero.prototype.timeToRegen = function (mana) {
-	// calculate using regenRate function;
-};
-
-Hero.prototype.regenRate = function () {
-	//calculate this based off current hero stats
-};
-
-//This probably should go in another file
-function Lina () {
-	this.baseInt = 27;
-	this.intPerLevel = 3.2;
-	this.heroName = "Lina";
+exports.Hero.prototype.getLevels = function() {
+	var levels = new Array();
+	for(var i=0; i<25; i++) {
+		var intel = Math.round((this.base+i*this.gain)*10)/10;
+		var regen = Math.round(((intel*0.04)+0.01)*100)/100;
+		var time = Math.round((this.cost/regen)*10)/10;
+		levels[i] = { 'level': i+1, 'intel': intel, 'regen': regen, 'time': time };
+	}
+	return levels;
 }
-Lina.prototype = new Hero();
