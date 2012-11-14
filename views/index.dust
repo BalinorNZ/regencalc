@@ -3,29 +3,64 @@
   <head>
     <title>{title}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type='text/javascript' src='/javascripts/knockout-2.2.0.js'></script>
+    <script type='text/javascript' src='/javascripts/jquery-1.8.2.min.js'></script>
+    <script type='text/javascript' src='/javascripts/viewmodel.js'></script>
   </head>
   <body>
+<h3>Tasks</h3>
+
+<form data-bind="submit: addTask">
+    Add task: <input data-bind="value: newTaskText" placeholder="What needs to be done?" />
+    <button type="submit">Add</button>
+</form>
+
+<ul data-bind="foreach: tasks, visible: tasks().length > 0">
+    <li>
+        <input type="checkbox" data-bind="checked: isDone" />
+        <input data-bind="value: title, disable: isDone" />
+        <a href="#" data-bind="click: $parent.removeTask">Delete</a>
+    </li> 
+</ul>
+
+You have <b data-bind="text: incompleteTasks().length">&nbsp;</b> incomplete task(s)
+<span data-bind="visible: incompleteTasks().length == 0"> - it's beer time!</span>
+
+
     <h1>{title}</h1>
     <p>Welcome to {title}</p>
-    <p>Base is {base} - Gain is {gain} - Cost is {cost}</p>
+    <p>Base is <span data-bind="text: base" ></span> - Gain is <span data-bind="text: gain" ></span> - Cost is <span data-bind="text: cost" ></span></p>
 	<table>
 		<tr><th>Level</th><th>Int</th><th>Regen</th><th>Seconds</th></tr>
-	{#levels}
+		{#levels}
 		<tr>
 			<td>{level}</td>
 			<td>{intel}</td>
 			<td>{regen}</td>
 			<td>{time}</td>
 		</tr>
-	{/levels}
+		{/levels}
 	</table>
 
 	<form action="/" method="POST">
-		<input type="text" id="stat_base" name="stat[base]" value="{stat.base}" />
-		<input type="text" id="stat_gain" name="stat[gain]" value="{stat.gain}" />
-		<input type="text" id="stat_cost" name="stat[cost]" value="{stat.cost}" />
-		<input type="submit" />
+		<input type="number" data-bind="value: base" />
+		<input type="number" data-bind="value: gain" />
+		<input type="number" data-bind="value: cost" />
 	</form> 
+
+	<table>
+		<thead>
+			<tr><th>Level</th><th>Int</th><th>Regen</th><th>Seconds</th></tr>
+		</thead>
+		<tbody data-bind="foreach: levels, visible: levels().length > 0">
+		    <tr>
+		    	<td data-bind="text: level"></td>
+		    	<td data-bind="text: intel"></td>
+		    	<td data-bind="text: regen"></td>
+		    	<td data-bind="text: time"></td>
+		    </tr>
+		</tbody>
+	</table>
 
   </body>
 </html>
