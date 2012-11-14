@@ -8,44 +8,21 @@
     <script type='text/javascript' src='/javascripts/viewmodel.js'></script>
   </head>
   <body>
-<h3>Tasks</h3>
-
-<form data-bind="submit: addTask">
-    Add task: <input data-bind="value: newTaskText" placeholder="What needs to be done?" />
-    <button type="submit">Add</button>
-</form>
-
-<ul data-bind="foreach: tasks, visible: tasks().length > 0">
-    <li>
-        <input type="checkbox" data-bind="checked: isDone" />
-        <input data-bind="value: title, disable: isDone" />
-        <a href="#" data-bind="click: $parent.removeTask">Delete</a>
-    </li> 
-</ul>
-
-You have <b data-bind="text: incompleteTasks().length">&nbsp;</b> incomplete task(s)
-<span data-bind="visible: incompleteTasks().length == 0"> - it's beer time!</span>
-
-
     <h1>{title}</h1>
     <p>Welcome to {title}</p>
-    <p>Base is <span data-bind="text: base" ></span> - Gain is <span data-bind="text: gain" ></span> - Cost is <span data-bind="text: cost" ></span></p>
-	<table>
+	<!--<table>
 		<tr><th>Level</th><th>Int</th><th>Regen</th><th>Seconds</th></tr>
 		{#levels}
-		<tr>
-			<td>{level}</td>
-			<td>{intel}</td>
-			<td>{regen}</td>
-			<td>{time}</td>
-		</tr>
+		<tr><td>{level}</td><td>{intel}</td><td>{regen}</td><td>{time}</td></tr>
 		{/levels}
-	</table>
+	</table>-->
 
 	<form action="/" method="POST">
-		<input type="number" data-bind="value: base" />
-		<input type="number" data-bind="value: gain" />
-		<input type="number" data-bind="value: cost" />
+	    <ul>
+	    	<li>Base is <input type="number" data-bind="value: base" /> intelligence</li>
+	    	<li>Gain is <input type="number" data-bind="value: gain" /> intelligence per level</li>
+	    	<li>Cost is <input type="number" data-bind="value: cost" /> mana</li>
+		</ul>
 	</form> 
 
 	<table>
