@@ -73,7 +73,10 @@ $(document).ready(function(){
             new Hero({ name: 'Sandking', base: 16, gain: 1.8, cost: 140}),
         ]);
 
-        self.items = ko.observableArray([ new Item({ name: "test" }) ]);
+        self.items = ko.observableArray([
+            new Item({ name: "test" }),
+            new Item({ name: "thing" })
+            ]);
         self.latestItem = ko.computed({
             read: function() {
                 return self.items().length ? self.items()[0] : "";
