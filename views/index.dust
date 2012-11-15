@@ -9,13 +9,23 @@
   </head>
   <body>
     <h1>{title}</h1>
-    <p>Welcome to {title}</p>
 	<!--<table>
 		<tr><th>Level</th><th>Int</th><th>Regen</th><th>Seconds</th></tr>
 		{#levels}
 		<tr><td>{level}</td><td>{intel}</td><td>{regen}</td><td>{time}</td></tr>
 		{/levels}
 	</table>-->
+	<p>Heroes:</p>
+	<ul data-bind="foreach: heroes, visible: heroes().length > 0">
+		<li style="display: inline; margin-left: 20px;">
+			<a href="#" data-bind="text: name, click: $parent.loadHero"></a>
+		</li>
+	</ul>
+
+	<p>Items:</p>
+	<ul data-bind="foreach: items, visible: items().length > 0">
+		<li data-bind="text: name"></li>
+    </ul>
 
 	<form action="/" method="POST">
 	    <ul>
@@ -38,6 +48,13 @@
 		    </tr>
 		</tbody>
 	</table>
+
+	<div data-bind="drop: {value: id}" id="slot-one" style="width:86px;height:64px;padding:10px;border:1px solid #aaaaaa;"></div>
+
+	<div id="shop" style="width:260px;height:64px;padding:10px;border:1px solid #aaaaaa;">
+	<img id="void-stone" data-bind="drag: {value: id}" src="/images/void-stone.png" alt="void stone" />
+	<img id="staff-of-wizardry" data-bind="drag: {value: id}" src="/images/staff-of-wizardry.png" alt="staff of wizardry" />
+	</div>
 
   </body>
 </html>
