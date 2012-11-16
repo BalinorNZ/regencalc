@@ -29,6 +29,18 @@ ko.bindingHandlers.drop = {
 
 $(document).ready(function(){
 
+    function Hero(data) {
+        this.name = data.name;
+        this.base = data.base;
+        this.gain = data.gain;
+        this.cost = data.cost;
+    }
+
+    function Item(data) {
+        this.name = data.name;
+        this.intel = data.intel;
+    }
+
     function Level(data) {
         this.level = ko.observable(data.level);
         this.intel = ko.computed(function() {
@@ -45,17 +57,6 @@ $(document).ready(function(){
         }, this);
     }
 
-    function Hero(data) {
-        this.name = data.name;
-        this.base = data.base;
-        this.gain = data.gain;
-        this.cost = data.cost;
-    }
-
-    function Item(data) {
-        this.name = data.name;
-    }
-
     function LevelsViewModel() {
         // Data
         var self = this;
@@ -65,7 +66,9 @@ $(document).ready(function(){
 
         self.levels = ko.observableArray([]);
         for(var i=0; i<25; i++) {
-            self.levels.push(new Level({ level: i+1, base: self.base, gain: self.gain, cost: self.cost }));
+            self.levels.push(
+                new Level({ level: i+1, base: self.base, gain: self.gain, cost: self.cost })
+            );
         }
 
         self.heroes = ko.observableArray([
@@ -74,24 +77,32 @@ $(document).ready(function(){
         ]);
 
         self.items = ko.observableArray([
-            new Item({ name: "test" }),
-            new Item({ name: "thing" })
-            ]);
-        self.latestItem = ko.computed({
+            new Item({ name: "mantle-of-intelligence", intel: 3 }),
+            new Item({ name: "robe-of-the-magi", intel: 6 }),
+            new Item({ name: "staff-of-wizardry", intel: 10 }),
+            new Item({ name: "mystic-staff", intel: 25 })
+        ]);
+        self.equippedItems = ko.observableArray([]);
+        self.buyItem = ko.computed({
             read: function() {
-                return self.items().length ? self.items()[0] : "";
+                return self.equippedItems().length ? self.items()[0] : "";
             },
-            write: function(value) {
-                this.items.unshift(value);
+            write: function(item) {
+                this.equippedItems.push(item);
+                self.base(item.intel+self.base());
             },
             owner: this
         });
 
         // Operations
         self.loadHero = function(hero) {
+            self.equippedItems.removeAll();
             self.base(hero.base);
             self.gain(hero.gain);
             self.cost(hero.cost);
+        };
+        self.loadItem = function(item) {
+            self.base(self.base+item.intel);
         };
     }
 

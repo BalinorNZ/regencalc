@@ -2,10 +2,12 @@
 <html>
   <head>
     <title>{title}</title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script type='text/javascript' src='/javascripts/knockout-2.2.0.js'></script>
     <script type='text/javascript' src='/javascripts/jquery-1.8.2.min.js'></script>
     <script type='text/javascript' src='/javascripts/jquery-ui-1.9.1.min.js'></script>
+    <script type='text/javascript' src='/javascripts/bootstrap.min.js'></script>
     <script type='text/javascript' src='/javascripts/viewmodel.js'></script>
   </head>
   <body>
@@ -16,17 +18,14 @@
 		<tr><td>{level}</td><td>{intel}</td><td>{regen}</td><td>{time}</td></tr>
 		{/levels}
 	</table>-->
-	<p>Heroes:</p>
-	<ul data-bind="foreach: heroes, visible: heroes().length > 0">
-		<li style="display: inline; margin-left: 20px;">
-			<a href="#" data-bind="text: name, click: $parent.loadHero"></a>
-		</li>
-	</ul>
-
-	<p>Items:</p>
-	<ul data-bind="foreach: items, visible: items().length > 0">
-		<li data-bind="text: name"></li>
-    </ul>
+	<div style="line-height: 20px;">
+		<span style="float: left">Heroes:</span>
+		<ul data-bind="foreach: heroes, visible: heroes().length > 0">
+			<li style="display: inline; margin-left: 20px;">
+				<a href="#" data-bind="text: name, click: $parent.loadHero"></a>
+			</li>
+		</ul>
+	</div>
 
 	<form action="/" method="POST">
 	    <ul>
@@ -50,16 +49,17 @@
 		</tbody>
 	</table>
 
-	<div data-bind="drop: {value: latestItem}" id="slot-one" style="width:86px;height:64px;padding:10px;border:1px solid #aaaaaa;">
-		<span data-bind="text: latestItem"></span>
+	<div data-bind="drop: { value: buyItem }" id="slot-one">
+		<h4>Equipped</h4>
+		<div id="slots" data-bind="foreach: equippedItems" style="width:516px;height:64px;padding:10px;border:1px solid #aaaaaa;">
+	    	<img data-bind="attr: { src: '/images/'+$data.name+'.png' }, drag: {value: $data}" />
+		</div>
+	</div>
 	</div>
 
-	<div id="shop" style="width:260px;height:64px;padding:10px;border:1px solid #aaaaaa;">
-	<!--<img id="void-stone" data-bind="drag: {value: id}" src="/images/void-stone.png" alt="void stone" />
-	<img id="staff-of-wizardry" data-bind="drag: {value: id}" src="/images/staff-of-wizardry.png" alt="staff of wizardry" />-->
-	<ul id="shop" data-bind="foreach: items">
-	    <li data-bind="text: $data.name, drag: {value: $data.name}"></li>
-	</ul>
+	<h4>Shop</h4>
+	<div id="shop" data-bind="foreach: items" style="width:344px;height:64px;padding:10px;border:1px solid #aaaaaa;">
+	    <img data-bind="attr: { src: '/images/'+$data.name+'.png' }, drag: {value: $data}" />
 	</div>
 
   </body>
