@@ -34,6 +34,36 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test');
+mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
+
+/*var db = mongoose.createConnection('mongodb://localhost/test');
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+});*/
+
+var schema = mongoose.Schema({name: 'string'});
+
+var HeroModel = mongoose.model('HeroModel', schema);
+
+var Hero = new HeroModel();
+Hero.name = "Crumpet";
+
+Hero.save(function (err) {
+  if(err) {
+    console.log('Error: ' + err);
+  }
+  console.log('Save successful');
+});
+
+HeroModel.find({}, function(err, heroes){
+  if(err){}
+    for (var i=0; i<heroes.length; i++) {
+      console.log('Hero ' + i + ' Name: ' + heroes[i].name);
+    }
+});
+
 app.get('/', routes.index);
 app.post('/', routes.calc);
 app.get('/users', user.list);
