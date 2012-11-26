@@ -4,6 +4,7 @@
  */
 
 exports.Hero = function (stats) {
+	this.name = stats.name;
 	this.base = parseFloat(stats.base);
  	this.gain = parseFloat(stats.gain);
  	this.cost = parseFloat(stats.cost);

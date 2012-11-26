@@ -60,6 +60,7 @@ $(document).ready(function(){
     function LevelsViewModel() {
         // Data
         var self = this;
+        self.name = ko.observable('default');
         self.base = ko.numericObservable(10);
         self.gain = ko.numericObservable(1);
         self.cost = ko.numericObservable(100);
@@ -97,6 +98,7 @@ $(document).ready(function(){
         // Operations
         self.loadHero = function(hero) {
             self.equippedItems.removeAll();
+            self.name(hero.name);
             self.base(hero.base);
             self.gain(hero.gain);
             self.cost(hero.cost);

@@ -27,12 +27,14 @@
 		</ul>
 	</div>
 
-	<form action="/" method="POST">
+	<form action="/addhero" method="POST">
 	    <ul>
-	    	<li>Base is <input type="number" data-bind="value: base" /> intelligence</li>
-	    	<li>Gain is <input type="number" data-bind="value: gain" /> intelligence per level</li>
-	    	<li>Cost is <input type="number" data-bind="value: cost" /> mana</li>
+	    	<li>Name is <input type="text" data-bind="value: name" name="stat[name]" /></li>
+	    	<li>Base is <input type="text" data-bind="value: base" name="stat[base]" /> intelligence</li>
+	    	<li>Gain is <input type="text" data-bind="value: gain" name="stat[gain]" /> intelligence per level</li>
+	    	<li>Cost is <input type="text" data-bind="value: cost" name="stat[cost]" /> mana</li>
 		</ul>
+		<input type="submit" value="Save Hero" />
 	</form> 
 
 	<table>

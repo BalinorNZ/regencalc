@@ -43,29 +43,9 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
 });*/
 
-var schema = mongoose.Schema({name: 'string'});
-
-var HeroModel = mongoose.model('HeroModel', schema);
-
-var Hero = new HeroModel();
-Hero.name = "Crumpet";
-
-Hero.save(function (err) {
-  if(err) {
-    console.log('Error: ' + err);
-  }
-  console.log('Save successful');
-});
-
-HeroModel.find({}, function(err, heroes){
-  if(err){}
-    for (var i=0; i<heroes.length; i++) {
-      console.log('Hero ' + i + ' Name: ' + heroes[i].name);
-    }
-});
-
 app.get('/', routes.index);
-app.post('/', routes.calc);
+app.post('/addhero', routes.addhero);
+//app.post('/', routes.calc);
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
