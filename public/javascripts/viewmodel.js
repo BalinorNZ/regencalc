@@ -73,9 +73,14 @@ $(document).ready(function(){
         }
 
         self.heroes = ko.observableArray([
-            new Hero({ name: 'Lina', base: 27, gain: 3.2, cost: 265}),
-            new Hero({ name: 'Sandking', base: 16, gain: 1.8, cost: 140}),
+            //new Hero({ name: 'Lina', base: 27, gain: 3.2, cost: 265}),
+            //new Hero({ name: 'Sandking', base: 16, gain: 1.8, cost: 140}),
         ]);
+
+        $.getJSON("/getheroes", function(heroes) {
+            var mappedHeroes = $.map(heroes, function(hero) { return new Hero(hero) });
+            self.heroes(mappedHeroes);
+        });
 
         self.items = ko.observableArray([
             new Item({ name: "mantle-of-intelligence", intel: 3 }),
