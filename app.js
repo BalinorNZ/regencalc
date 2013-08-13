@@ -34,8 +34,31 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test');
+mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
+
+// HeroModel.find({}, function(err, heroes){
+//   if(err){}
+//   for (var i=0; i<heroes.length; i++) {
+//     console.log('Hero ' + i + ' Name: ' + heroes[i].name + ' Base: ' + heroes[i].base);
+//   }
+// });
+// Hero.save(function (err) {
+//   if(err) {
+//     console.log('Error: ' + err);
+//   }
+//   console.log('Save successful');
+// });
+/*var db = mongoose.createConnection('mongodb://localhost/test');
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+});*/
+
 app.get('/', routes.index);
-app.post('/', routes.calc);
+app.post('/addhero', routes.addhero);
+app.get('/getheroes', routes.getheroes);
+//app.post('/', routes.calc);
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
